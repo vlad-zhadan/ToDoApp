@@ -21,7 +21,6 @@ public class Task
     [Required]
     public Status Status{ get; set; }
     
-    [Required]
     [DataType(DataType.Date)]
     public DateTime DueDate{ get; set; }
 }
