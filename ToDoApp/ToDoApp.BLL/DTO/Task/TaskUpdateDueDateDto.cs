@@ -8,8 +8,8 @@ namespace ToDoApp.BLL.DTO.Task;
 public class TaskUpdateDueDateDto
 {
     [Required]
-    [GreaterOrEqualThan(GeneralConstants.MinValueForId,ErrorMessage = "TaskId is invalid")]
-    public int TaskId { get; set; }
+    [GreaterOrEqualThan(GeneralConstants.MinValueForId,ErrorMessage = "Id is invalid")]
+    public int Id { get; set; }
     
     [Required]
     [ValidDateForTask(ErrorMessage = "Due date should be within the allowed range.")]

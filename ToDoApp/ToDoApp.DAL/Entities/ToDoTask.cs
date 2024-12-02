@@ -5,11 +5,11 @@ using ToDoApp.DAL.Enums;
 namespace ToDoApp.DAL.Entities;
 
 [Table("Tasks")]
-public class Task
+public class ToDoTask
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int TaskId { get; set; }
+    public int Id { get; set; }
     
     [Required]
     [MaxLength(70)]

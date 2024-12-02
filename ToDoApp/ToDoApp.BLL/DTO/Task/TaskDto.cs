@@ -4,7 +4,7 @@ namespace ToDoApp.BLL.DTO.Task;
 
 public class TaskDto
 {
-    public int TaskId { get; set; }
+    public int Id { get; set; }
     
     public string? Name{ get; set; }
     

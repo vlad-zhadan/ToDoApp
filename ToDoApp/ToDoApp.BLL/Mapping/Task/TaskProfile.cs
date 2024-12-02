@@ -7,8 +7,8 @@ public class TaskProfile : Profile
 {
     public TaskProfile()
     {
-        CreateMap<DAL.Entities.Task, TaskDto>();
-        CreateMap<TaskCreateDto, DAL.Entities.Task>();
-        CreateMap<TaskUpdateDto, DAL.Entities.Task>();
+        CreateMap<DAL.Entities.ToDoTask, TaskDto>();
+        CreateMap<TaskCreateDto, DAL.Entities.ToDoTask>();
+        CreateMap<TaskUpdateDto, DAL.Entities.ToDoTask>();
     }
 }

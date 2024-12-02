@@ -19,11 +19,11 @@ internal class UpdateTaskDueDateHandler : IRequestHandler<UpdateTaskDueDateComma
     public async Task<Result<int>> Handle(UpdateTaskDueDateCommand request, CancellationToken cancellationToken)
     {
         var existedTask =
-            await _repositoryWrapper.TaskRepository.GetFirstOrDefaultAsync(t => t.TaskId == request.TaskUpdatedDueDate.TaskId);
+            await _repositoryWrapper.TaskRepository.GetFirstOrDefaultAsync(t => t.Id == request.TaskUpdatedDueDate.Id);
         
         if (existedTask is null)
         {
-            string errorMessage = $"Task with id: {request.TaskUpdatedDueDate.TaskId} was not found";
+            string errorMessage = $"ToDoTask with id: {request.TaskUpdatedDueDate.Id} was not found";
             return Result.Fail(errorMessage);
         }
 
@@ -31,14 +31,14 @@ internal class UpdateTaskDueDateHandler : IRequestHandler<UpdateTaskDueDateComma
         {
             if (existedTask.DueDate == request.TaskUpdatedDueDate.DueDate)
             {
-                return Result.Ok(request.TaskUpdatedDueDate.TaskId);
+                return Result.Ok(request.TaskUpdatedDueDate.Id);
             }
             
             existedTask.DueDate = request.TaskUpdatedDueDate.DueDate;
             _repositoryWrapper.TaskRepository.Update(existedTask);
             await _repositoryWrapper.SaveChangesAsync();
             
-            return Result.Ok(request.TaskUpdatedDueDate.TaskId);
+            return Result.Ok(request.TaskUpdatedDueDate.Id);
         }
         catch (Exception ex)
         {

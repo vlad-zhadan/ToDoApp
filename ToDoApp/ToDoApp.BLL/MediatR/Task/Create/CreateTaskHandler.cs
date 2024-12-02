@@ -21,7 +21,7 @@ internal class CreateTaskHandler : IRequestHandler<CreateTaskCommand, Result<Tas
     {
         try
         {
-            var task = _mapper.Map<DAL.Entities.Task>(request.Task);
+            var task = _mapper.Map<DAL.Entities.ToDoTask>(request.Task);
             var createdTask = await _repositoryWrapper.TaskRepository.CreateAsync(task);
             await _repositoryWrapper.SaveChangesAsync();
 

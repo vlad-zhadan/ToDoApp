@@ -9,8 +9,8 @@ namespace ToDoApp.BLL.DTO.Task;
 public class TaskUpdateStatusDto
 {
     [Required]
-    [GreaterOrEqualThan(GeneralConstants.MinValueForId,ErrorMessage = "TaskId is invalid")]
-    public int TaskId { get; set; }
+    [GreaterOrEqualThan(GeneralConstants.MinValueForId,ErrorMessage = "Id is invalid")]
+    public int Id { get; set; }
     
     [Required(ErrorMessage = "Status is required")]
     [ValidStatus(ErrorMessage = "Invalid status")]

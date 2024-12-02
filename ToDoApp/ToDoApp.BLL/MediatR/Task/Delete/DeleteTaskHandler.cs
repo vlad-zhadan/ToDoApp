@@ -15,11 +15,11 @@ internal class DeleteTaskHandler : IRequestHandler<DeleteTaskCommand, Result<int
     
     public async Task<Result<int>> Handle(DeleteTaskCommand request, CancellationToken cancellationToken)
     {
-        var taskToDelete = await _repositoryWrapper.TaskRepository.GetFirstOrDefaultAsync(predicate: t => t.TaskId == request.TaskId);
+        var taskToDelete = await _repositoryWrapper.TaskRepository.GetFirstOrDefaultAsync(predicate: t => t.Id == request.TaskId);
 
         if (taskToDelete is null)
         {
-            string errorMessage = $"Task with id: {request.TaskId} does not exist";
+            string errorMessage = $"ToDoTask with id: {request.TaskId} does not exist";
             return Result.Fail(errorMessage);
         }
 
@@ -28,7 +28,7 @@ internal class DeleteTaskHandler : IRequestHandler<DeleteTaskCommand, Result<int
             _repositoryWrapper.TaskRepository.Delete(taskToDelete);
             await _repositoryWrapper.SaveChangesAsync();
             
-            return Result.Ok(taskToDelete.TaskId);
+            return Result.Ok(taskToDelete.Id);
         }
         catch (Exception ex)
         {

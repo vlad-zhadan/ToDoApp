@@ -31,7 +31,7 @@ public class TaskController : BaseController
     }
     
     [HttpPost]
-    public async Task<IActionResult> CreateTak([FromBody] TaskCreateDto newTask)
+    public async Task<IActionResult> CreateTask([FromBody] TaskCreateDto newTask)
     {
         return  HandleResult(await _mediator.Send(new CreateTaskCommand(newTask)));
     }

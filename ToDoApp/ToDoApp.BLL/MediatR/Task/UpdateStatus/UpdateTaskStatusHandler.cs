@@ -17,11 +17,11 @@ internal class UpdateTaskStatusHandler : IRequestHandler<UpdateTaskStatusCommand
     public async Task<Result<int>> Handle(UpdateTaskStatusCommand request, CancellationToken cancellationToken)
     {
         var existedTask =
-            await _repositoryWrapper.TaskRepository.GetFirstOrDefaultAsync(t => t.TaskId == request.TaskUpdatedStatus.TaskId);
+            await _repositoryWrapper.TaskRepository.GetFirstOrDefaultAsync(t => t.Id == request.TaskUpdatedStatus.Id);
         
         if (existedTask is null)
         {
-            string errorMessage = $"Task with id: {request.TaskUpdatedStatus.TaskId} was not found";
+            string errorMessage = $"ToDoTask with id: {request.TaskUpdatedStatus.Id} was not found";
             return Result.Fail(errorMessage);
         }
 
@@ -29,14 +29,14 @@ internal class UpdateTaskStatusHandler : IRequestHandler<UpdateTaskStatusCommand
         {
             if (existedTask.Status == request.TaskUpdatedStatus.Status)
             {
-                return Result.Ok(request.TaskUpdatedStatus.TaskId);
+                return Result.Ok(request.TaskUpdatedStatus.Id);
             }
             
             existedTask.Status = request.TaskUpdatedStatus.Status;
             _repositoryWrapper.TaskRepository.Update(existedTask);
             await _repositoryWrapper.SaveChangesAsync();
             
-            return Result.Ok(request.TaskUpdatedStatus.TaskId);
+            return Result.Ok(request.TaskUpdatedStatus.Id);
         }
         catch (Exception ex)
         {

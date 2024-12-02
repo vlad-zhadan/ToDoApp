@@ -16,7 +16,7 @@ public class ValidDateForTaskAttribute : ValidationAttribute
         {
             var maxDate = DateTime.Now.Date.AddYears(TaskConstants.MaxNumberOfYearsForTaskFromToday);
             var minDate = DateTime.Now.Date.AddYears(-TaskConstants.MinNumberOfYearsForTaskFromToday);
-            return (dateTime.Date >= maxDate && dateTime.Date <= minDate);
+            return (dateTime.Date <= maxDate && dateTime.Date >= minDate);
         }
         
         return false;

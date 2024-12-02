@@ -2,6 +2,7 @@ using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Query;
+using ToDoApp.DAL.Persistence;
 using ToDoApp.DAL.Repositories.Interfaces.Base;
 
 namespace ToDoApp.DAL.Repositories.Realizations.Base;
@@ -9,9 +10,9 @@ namespace ToDoApp.DAL.Repositories.Realizations.Base;
 public abstract class BaseRepository<T> : IBaseRepository<T> 
     where T : class
 {
-    private readonly DbContext _dbContext;
+    private readonly ToDoAppDbContext _dbContext;
 
-    protected BaseRepository(DbContext dbContext)
+    protected BaseRepository(ToDoAppDbContext dbContext)
     {
         _dbContext = dbContext;
     }

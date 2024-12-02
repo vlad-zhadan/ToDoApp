@@ -20,17 +20,17 @@ internal class UpdateTaskHandler : IRequestHandler<UpdateTaskCommand, Result<Tas
     public async Task<Result<TaskDto>> Handle(UpdateTaskCommand request, CancellationToken cancellationToken)
     {
         var existedTask =
-            await _repositoryWrapper.TaskRepository.GetFirstOrDefaultAsync(t => t.TaskId == request.UpdetedTask.TaskId);
+            await _repositoryWrapper.TaskRepository.GetFirstOrDefaultAsync(t => t.Id == request.UpdetedTask.Id);
         
         if (existedTask is null)
         {
-            string errorMessage = $"Task with id: {request.UpdetedTask.TaskId} was not found";
+            string errorMessage = $"ToDoTask with id: {request.UpdetedTask.Id} was not found";
             return Result.Fail(errorMessage);
         }
 
         try
         {
-            var taskToChange = _mapper.Map<DAL.Entities.Task>(request.UpdetedTask);
+            var taskToChange = _mapper.Map<DAL.Entities.ToDoTask>(request.UpdetedTask);
             _repositoryWrapper.TaskRepository.Update(taskToChange);
             await _repositoryWrapper.SaveChangesAsync();
             

@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using ToDoApp.DAL.Persistence;
 using ToDoApp.DAL.Repositories.Interfaces.Base;
 using ToDoApp.DAL.Repositories.Interfaces.Task;
 using ToDoApp.DAL.Repositories.Realizations.Task;
@@ -7,9 +8,9 @@ namespace ToDoApp.DAL.Repositories.Realizations.Base;
 
 public class RepositoryWrapper : IRepositoryWrapper
 {
-    private readonly DbContext _context;
+    private readonly ToDoAppDbContext _context;
 
-    public RepositoryWrapper(DbContext context)
+    public RepositoryWrapper(ToDoAppDbContext context)
     {
         _context = context;
     }
