@@ -11,7 +11,7 @@ namespace ToDoApp.DAL.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(    
                 name: "Tasks",
                 columns: table => new
                 {

@@ -42,13 +42,13 @@ public class TaskController : BaseController
         return  HandleResult(await _mediator.Send(new UpdateTaskCommand(updatedTask)));
     }
     
-    [HttpPut]
+    [HttpPatch("status")]
     public async Task<IActionResult> UpdateTaskStatus([FromBody] TaskUpdateStatusDto updatedTaskStatus)
     {
         return  HandleResult(await _mediator.Send(new UpdateTaskStatusCommand(updatedTaskStatus)));
     }
     
-    [HttpPut]
+    [HttpPatch("due-date")]
     public async Task<IActionResult> UpdateTaskDueDate([FromBody] TaskUpdateDueDateDto updatedTaskDueDate)
     {
         return  HandleResult(await _mediator.Send(new UpdateTaskDueDateCommand(updatedTaskDueDate)));

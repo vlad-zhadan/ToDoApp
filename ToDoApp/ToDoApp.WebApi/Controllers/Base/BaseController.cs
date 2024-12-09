@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace ToDoApp.WebApi.Controllers.Base;
 
 [ApiController]
-[Route("api/[controller]/[action]")]
+[Route("api/[controller]")]
 public class BaseController : ControllerBase
 {
     protected readonly IMediator _mediator;

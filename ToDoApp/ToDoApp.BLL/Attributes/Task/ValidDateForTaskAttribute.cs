@@ -11,14 +11,19 @@ public class ValidDateForTaskAttribute : ValidationAttribute
         {
             return true;
         }
-        
+    
         if (value is DateTime dateTime)
         {
-            var maxDate = DateTime.Now.Date.AddYears(TaskConstants.MaxNumberOfYearsForTaskFromToday);
-            var minDate = DateTime.Now.Date.AddYears(-TaskConstants.MinNumberOfYearsForTaskFromToday);
-            return (dateTime.Date <= maxDate && dateTime.Date >= minDate);
+            var today = DateTime.Now.Date;
+
+            var previousMonday = today.AddDays((int)DayOfWeek.Monday - (int)today.DayOfWeek);
+            
+            var minDate = previousMonday;
+            var maxDate = today.AddDays(TaskConstants.NumberOfDaysAfterTodayYouCanPlanFor);
+
+            return (dateTime.Date >= minDate && dateTime.Date <= maxDate);
         }
-        
+    
         return false;
     }
 }
