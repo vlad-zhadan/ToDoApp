@@ -57,11 +57,12 @@ From repository root:
 
 Health endpoint:
 
-- GET /api/health
+- GET /health
+- GET /api/health (compatible alias)
 
 With DB connected:
 
-curl -i http://localhost:5201/api/health
+curl -i http://localhost:8080/health
 
 Expected status: 200
 
@@ -69,7 +70,7 @@ Expected status: 200
 
 With DB stopped:
 
-curl -i http://localhost:5201/api/health
+curl -i http://localhost:8080/health
 
 Expected status: 503
 

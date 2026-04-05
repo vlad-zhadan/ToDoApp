@@ -5,6 +5,7 @@ using ToDoApp.WebApi.Controllers.Base;
 
 namespace ToDoApp.WebApi.Controllers.Health;
 
+[Route("health")]
 [Route("api/health")]
 public class HealthController : BaseController
 {
