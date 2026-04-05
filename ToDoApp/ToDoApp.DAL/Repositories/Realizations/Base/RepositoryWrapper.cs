@@ -21,17 +21,22 @@ public class RepositoryWrapper : IRepositoryWrapper
     {
         get
         {
-            if(_taskRepository == null)
+            if (_taskRepository == null)
             {
                 _taskRepository = new TaskRepository(_context);
             }
             return _taskRepository;
         }
     }
-    
+
     public int SaveChanges()
     {
         return _context.SaveChanges();
+    }
+
+    public async Task<bool> CanConnectAsync(CancellationToken cancellationToken = default)
+    {
+        return await _context.Database.CanConnectAsync(cancellationToken);
     }
 
     public async Task<int> SaveChangesAsync()
