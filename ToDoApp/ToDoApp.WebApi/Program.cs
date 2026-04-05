@@ -19,15 +19,8 @@ try
     var builder = WebApplication.CreateBuilder(args);
     builder.Host.UseSerilog();
 
-    var dbHost = GetRequiredEnvironmentVariable("DB_HOST");
-    var dbPort = GetRequiredEnvironmentVariable("DB_PORT");
-    var dbName = GetRequiredEnvironmentVariable("DB_NAME");
-    var dbUser = GetRequiredEnvironmentVariable("DB_USER");
-    var dbPassword = GetRequiredEnvironmentVariable("DB_PASSWORD");
     var corsOrigin = Environment.GetEnvironmentVariable("CORS_ORIGIN");
-
-    var connectionString =
-        $"Server={dbHost},{dbPort};Database={dbName};User Id={dbUser};Password={dbPassword};Encrypt=False;TrustServerCertificate=True;";
+    var connectionString = BuildConnectionStringFromEnvironment();
 
     builder.Services.AddDbContext<ToDoAppDbContext>(options => options.UseSqlServer(connectionString));
 
@@ -98,4 +91,33 @@ static string GetRequiredEnvironmentVariable(string variableName)
     }
 
     return value;
+}
+
+static string BuildConnectionStringFromEnvironment()
+{
+    var dbHost = GetRequiredEnvironmentVariable("DB_HOST");
+    var dbPort = GetRequiredEnvironmentVariable("DB_PORT");
+    var dbName = GetRequiredEnvironmentVariable("DB_NAME");
+    var useWindowsAuth = GetOptionalBooleanEnvironmentVariable("DB_USE_WINDOWS_AUTH");
+
+    if (useWindowsAuth)
+    {
+        var isLocalDb = dbHost.StartsWith("(localdb)\\", StringComparison.OrdinalIgnoreCase);
+        var server = isLocalDb ? dbHost : $"{dbHost},{dbPort}";
+
+        Log.Information("Using Windows Authentication for database connection");
+        return $"Server={server};Database={dbName};Trusted_Connection=True;Encrypt=False;TrustServerCertificate=True;";
+    }
+
+    var dbUser = GetRequiredEnvironmentVariable("DB_USER");
+    var dbPassword = GetRequiredEnvironmentVariable("DB_PASSWORD");
+
+    return
+        $"Server={dbHost},{dbPort};Database={dbName};User Id={dbUser};Password={dbPassword};Encrypt=False;TrustServerCertificate=True;";
+}
+
+static bool GetOptionalBooleanEnvironmentVariable(string variableName)
+{
+    var value = Environment.GetEnvironmentVariable(variableName);
+    return bool.TryParse(value, out var parsed) && parsed;
 }
