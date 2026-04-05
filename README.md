@@ -24,7 +24,7 @@ $env:CORS_ORIGIN="http://localhost:3000"
 
 PowerShell example (LocalDB with Windows Authentication):
 
-$env:DB_HOST="(localdb)\\MSSQLLocalDB"
+$env:DB_HOST="(localdb)\MSSQLLocalDB"
 $env:DB_PORT="1433"
 $env:DB_NAME="ToDoApp"
 $env:DB_USER=""
@@ -65,13 +65,15 @@ curl -i http://localhost:5201/api/health
 
 Expected status: 200
 
+![alt text](image.png)
+
 With DB stopped:
 
 curl -i http://localhost:5201/api/health
 
 Expected status: 503
 
-Add screenshots of both outputs to satisfy lab submission requirements.
+![alt text](image-1.png)
 
 ## 4. JSON Log Example
 
@@ -103,4 +105,4 @@ Expected log message:
 
 SIGTERM received. Starting graceful shutdown...
 
-Add screenshot with this log line for submission.
+![alt text](image-2.png)
