@@ -7,15 +7,18 @@ public static class WebApplicationExtensions
 {
     public static async Task ApplyMigrations(this WebApplication app)
     {
-        var logger = app.Services.GetRequiredService<ILogger<Program>>();
+        await using var scope = app.Services.CreateAsyncScope();
+        var logger = scope.ServiceProvider.GetRequiredService<ILoggerFactory>().CreateLogger("StartupMigration");
         try
         {
-            var toDoAppContext = app.Services.GetRequiredService<ToDoAppDbContext>();
+            var toDoAppContext = scope.ServiceProvider.GetRequiredService<ToDoAppDbContext>();
             await toDoAppContext.Database.MigrateAsync();
+            logger.LogInformation("Database migrations applied successfully");
         }
         catch (Exception ex)
         {
-            logger.LogError(ex, "An error occured during startup migration");
+            logger.LogError(ex, "Failed to apply startup migrations");
+            throw;
         }
     }
 }
