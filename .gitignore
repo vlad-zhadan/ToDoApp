@@ -12,6 +12,7 @@
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
+/tasks/
 
 # Build results
 [Dd]ebug/
@@ -347,3 +348,4 @@ BlobStorage/
 BlobStorageTestFolder/
 /Streetcode/StreetCode.Client
 BlobStorage.rar
+scripts/set-todoapp-env.ps1
