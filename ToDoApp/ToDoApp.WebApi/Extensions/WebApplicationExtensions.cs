@@ -18,7 +18,6 @@ public static class WebApplicationExtensions
         catch (Exception ex)
         {
             logger.LogError(ex, "Failed to apply startup migrations");
-            throw;
         }
     }
 }
