@@ -14,12 +14,12 @@ spec:
     spec:
       containers:
         - name: db
-          image: { { .Values.db.image | quote } }
+          image: {{ .Values.db.image | quote }}
           ports:
-            - containerPort: { { .Values.db.port } }
+            - containerPort: {{ .Values.db.port }}
           env:
             - name: ACCEPT_EULA
-              value: { { .Values.db.acceptEula | quote } }
+              value: {{ .Values.db.acceptEula | quote }}
             - name: MSSQL_SA_PASSWORD
               valueFrom:
                 secretKeyRef:

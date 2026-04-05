@@ -7,5 +7,5 @@ spec:
   selector:
     app: db
   ports:
-    - port: { { .Values.db.port } }
-      targetPort: { { .Values.db.port } }
+    - port: {{ .Values.db.port }}
+      targetPort: {{ .Values.db.port }}

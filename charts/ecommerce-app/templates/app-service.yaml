@@ -3,9 +3,9 @@ kind: Service
 metadata:
   name: ecommerce-app
 spec:
-  type: { { .Values.service.type } }
+  type: {{ .Values.service.type }}
   selector:
     app: ecommerce-app
   ports:
-    - port: { { .Values.service.port } }
-      targetPort: { { .Values.service.port } }
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.service.port }}
